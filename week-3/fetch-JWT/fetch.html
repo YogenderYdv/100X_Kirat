@@ -1,0 +1,12 @@
+<body>
+    <script>
+        async function addata()
+        {
+            const response = await fetch("https://fakerapi.it/api/v1/persons");
+            const data = await response.json(); // why this AWAIT ?- coz fetch is an async fucn , so the data that will come will take some time also 
+            //to load , first await was  just to fetch or can say call , loading data will also be a async CALL !!.
+            console.log(response);
+        }
+    </script>
+    <button onclick="addata()">get data</button>
+</body>
