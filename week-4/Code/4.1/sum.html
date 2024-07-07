@@ -1,0 +1,52 @@
+<body>
+
+    
+    
+    <script>
+        // function add()
+        // {
+        //     const a=document.getElementById('first').value;
+        //     const b=document.getElementById('second').value;
+
+        //     const ans=parseInt(a)+parseInt(b);
+        //     const value=document.getElementById('sum');
+        //     value.innerHTML=`sum : ${ans}`;
+
+        // }
+    
+    let timeout;
+    function timer()
+    {
+        clearTimeout(timeout);
+        timeout= setTimeout(function(){
+            add()
+        },5000);
+    }
+
+    async function add()
+    {
+        const a=document.getElementById('first').value;
+        const b=document.getElementById('second').value;
+
+        const response=await fetch(`http://localhost:3000/?a=${a}&b=${b}`);
+        const ans=await response.text();
+        const value=document.getElementById('sum');
+        value.innerHTML=ans;
+
+    }
+    </script>
+
+    <!-- <input id="first" type="number" placeholder="first number"/>
+    <br></br>
+    <input id="second" type="number" placeholder="second number"/>
+    <br></br>
+    <button onclick="add()">Add</button> -->
+
+    <input oninput="timer()" id="first" type="number" placeholder="first number"/>
+    <br></br>
+    <input oninput="timer()" id="second" type="number" placeholder="second number"/>
+    <br></br>
+
+    <div id="sum">
+    </div>
+</body>
