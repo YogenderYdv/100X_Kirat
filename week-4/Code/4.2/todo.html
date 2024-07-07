@@ -1,0 +1,52 @@
+<body>
+
+
+    <script>
+        let globalid=1;
+        function markasdone(id)
+        {
+            const mark=document.getElementById(id);
+            mark.children[2].innerHTML='Done !';
+        }
+
+        function createtree(title,description,id)
+        {
+            const outerdiv=document.createElement("div");
+            const titlediv=document.createElement('div');
+            titlediv.innerHTML=title;
+            const descriptiondiv=document.createElement('div');
+            descriptiondiv.innerHTML=description;
+            const buttondiv=document.createElement('button');
+            buttondiv.innerHTML='Mark as Done';
+            buttondiv.setAttribute('onclick',`markasdone(${id})`);
+            outerdiv.appendChild(titlediv);
+            outerdiv.appendChild(descriptiondiv);
+            outerdiv.appendChild(buttondiv);
+            outerdiv.setAttribute('id',id);
+            return outerdiv;
+        }
+        function add()
+        {
+            const title=document.getElementById("title").value;
+            const description=document.getElementById("description").value;
+
+            const final=document.getElementById("container");
+            final.appendChild(createtree(title,description,globalid++));
+        }
+    </script>
+
+    <input
+    id="title"
+    type="text"
+    placeholder="title"/>
+    <br></br>
+    <input
+    id="description"
+    type="text"
+    placeholder="description"/>
+    <br></br>
+    <button onclick="add()">Add</button>
+
+    <div id="container"></div>
+
+</body>

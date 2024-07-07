@@ -1,0 +1,81 @@
+<body>
+  <!-- now suppose you have given a state(can be array ,list etc) as input how will you render that data 
+  also you have given one server from where you render you state data 
+  hint:- to read inputs from state by Function  -->
+        
+    <input
+    oninput="add()"
+    id="title"
+    type="text"
+    placeholder="title"/>
+    <br></br>
+    <input
+    oninput="add()"
+    id="description"
+    type="text"
+    placeholder="description"/>
+    <br></br>
+    <!-- <button onclick="add()">Add</button> -->
+
+    <div id="container"></div>
+
+    <script>
+        // let globalid=1;
+        // function markasdone(id)
+        // {
+        //     const mark=document.getElementById(id);
+        //     mark.children[2].innerHTML='Done !';
+        // }
+
+        function createtree(title,description,id)
+        {
+            const outerdiv=document.createElement("div");
+            const titlediv=document.createElement('div');
+            titlediv.innerHTML=title;
+            const descriptiondiv=document.createElement('div');
+            descriptiondiv.innerHTML=description;
+            const buttondiv=document.createElement('button');
+            buttondiv.innerHTML='Mark as Done';
+            buttondiv.setAttribute('onclick',`markasdone(${id})`);
+            outerdiv.appendChild(titlediv);
+            outerdiv.appendChild(descriptiondiv);
+            outerdiv.appendChild(buttondiv);
+            outerdiv.setAttribute('id',id);
+            return outerdiv;
+        }
+
+        function updatestate(state)
+        {
+            const finaldata=document.getElementById('container');
+            finaldata.innerHTML="";
+            for(let i=0;i<state.length;i++)
+            {
+                const tree=createtree(state[i].title,state[i].description,state[i].id);
+                finaldata.appendChild(tree);
+            }     
+        }
+        
+       setInterval(async function(){
+            const response=await fetch('https://sum-server.100xdevs.com/todos');
+            const data=await response.json();
+            updatestate(data.todos);
+        },5000)
+        // async function add()
+        // {
+        //     const title=document.getElementById("title").value;
+        //     const description=document.getElementById("description").value;
+            
+        //     const response=await fetch(``)
+
+        //     const final=document.getElementById("container");
+        //     final.appendChild(createtree(title,description,globalid++));
+        // }
+
+        wind
+    </script>
+
+
+
+    
+
+</body>
